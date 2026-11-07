@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#120e0b" />
+    <title>COMPLICE — your world, your companion</title>
+  </head>
+  <body>
+    <canvas id="scene" tabindex="0" aria-label="COMPLICE virtual room"></canvas>
+
+    <div id="hud">
+      <header class="hud__top">
+        <span class="wordmark">COMPLICE</span>
+        <span id="status" class="pill" data-state="idle">Idle</span>
+      </header>
+
+      <div class="captioner" aria-live="polite">
+        <p id="caption"></p>
+      </div>
+
+      <footer class="hud__bottom">
+        <span class="hint">Hold to talk — voice arrives in Phase 4</span>
+      </footer>
+    </div>
+
+    <div id="gate" class="gate">
+      <div class="gate__card">
+        <p class="gate__eyebrow">A spatial companion study</p>
+        <h1>COMPLICE</h1>
+        <p class="gate__lede">
+          A friend who lives in the room. She is an AI, and she says so.
+        </p>
+        <button id="enter" type="button">Enter the room</button>
+        <p class="gate__note">Works on desktop and in a headset browser.</p>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
