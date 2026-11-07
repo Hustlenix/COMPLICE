@@ -12,11 +12,11 @@ export function buildRoom(scene: THREE.Scene): void {
   room.add(floor);
 
   const rug = new THREE.Mesh(
-    new THREE.CircleGeometry(1.15, 48),
+    new THREE.CircleGeometry(0.95, 48),
     new THREE.MeshStandardMaterial({ color: 0x8a5545, roughness: 1 })
   );
   rug.rotation.x = -Math.PI / 2;
-  rug.position.y = 0.005;
+  rug.position.set(0, 0.005, -0.7);
   room.add(rug);
 
   const wallMaterial = new THREE.MeshStandardMaterial({
@@ -37,6 +37,14 @@ export function buildRoom(scene: THREE.Scene): void {
   rightWall.rotation.y = -Math.PI / 2;
   rightWall.position.set(3, 1.5, 0);
   room.add(rightWall);
+
+  const ceiling = new THREE.Mesh(
+    new THREE.PlaneGeometry(6, 6),
+    new THREE.MeshStandardMaterial({ color: 0x3a2c22, roughness: 1 })
+  );
+  ceiling.rotation.x = Math.PI / 2;
+  ceiling.position.y = 3;
+  room.add(ceiling);
 
   const windowGlass = new THREE.Mesh(
     new THREE.PlaneGeometry(1.6, 1.1),
@@ -102,7 +110,7 @@ export function buildRoom(scene: THREE.Scene): void {
   );
   lampShade.position.set(0.45, 1.18, 0);
 
-  const bulb = new THREE.PointLight(0xffc98a, 8, 6, 2);
+  const bulb = new THREE.PointLight(0xffc98a, 3.2, 5.5, 2);
   bulb.position.set(0.45, 1.1, 0);
 
   desk.add(lampBase, lampStem, lampShade, bulb);
@@ -110,6 +118,10 @@ export function buildRoom(scene: THREE.Scene): void {
 
   const ambient = new THREE.HemisphereLight(0xffe7cf, 0x2a1d14, 0.9);
   room.add(ambient);
+
+  const fill = new THREE.PointLight(0xffe3c8, 1.6, 9, 2);
+  fill.position.set(0, 2.1, 2.2);
+  room.add(fill);
 
   scene.add(room);
 }

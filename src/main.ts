@@ -27,20 +27,29 @@ const camera = new THREE.PerspectiveCamera(
   0.05,
   100
 );
-camera.position.set(0, 1.6, 2.4);
+camera.position.set(0, 1.55, 2.9);
 
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.target.set(0, 1.3, 0);
+controls.target.set(0, 1.15, -0.7);
 controls.enableDamping = true;
-controls.maxDistance = 5;
-controls.minDistance = 1;
+controls.maxDistance = 5.5;
+controls.minDistance = 1.6;
+controls.minPolarAngle = Math.PI * 0.28;
+controls.maxPolarAngle = Math.PI * 0.55;
 
 buildRoom(scene);
 
 const companion = buildCompanion();
+companion.group.position.set(0, 0, -0.7);
 scene.add(companion.group);
 
-document.body.appendChild(VRButton.createButton(renderer));
+const xrSlot = document.querySelector<HTMLDivElement>('#xr-slot');
+const xrButton = VRButton.createButton(renderer);
+if (xrSlot) {
+  xrSlot.appendChild(xrButton);
+} else {
+  document.body.appendChild(xrButton);
+}
 
 const machine = createStateMachine('idle');
 bindOverlay(machine);

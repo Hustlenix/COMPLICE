@@ -15,6 +15,7 @@ dist-ssr/
 .superpowers/
 .vercel/
 coverage/
+.visual/
 
 # editor and OS noise
 .DS_Store

@@ -36,6 +36,7 @@ export function bindOverlay(machine: StateMachine): void {
     entered = true;
 
     gate.classList.add('gate--hidden');
+    document.body.dataset.entered = 'true';
     window.dispatchEvent(new CustomEvent('complice:enter'));
     document.querySelector<HTMLCanvasElement>('#scene')?.focus();
   });
