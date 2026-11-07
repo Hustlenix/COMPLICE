@@ -70,6 +70,43 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
+let hasEntered = false;
+window.addEventListener('complice:enter', () => {
+  hasEntered = true;
+});
+
+const LOOK_STEP = THREE.MathUtils.degToRad(6);
+
+window.addEventListener('keydown', (event) => {
+  if (!hasEntered) return;
+
+  const offset = camera.position.clone().sub(controls.target);
+  const spherical = new THREE.Spherical().setFromVector3(offset);
+
+  switch (event.key) {
+    case 'ArrowLeft':
+      spherical.theta -= LOOK_STEP;
+      break;
+    case 'ArrowRight':
+      spherical.theta += LOOK_STEP;
+      break;
+    case 'ArrowUp':
+      spherical.phi = Math.max(0.35, spherical.phi - LOOK_STEP);
+      break;
+    case 'ArrowDown':
+      spherical.phi = Math.min(1.5, spherical.phi + LOOK_STEP);
+      break;
+    default:
+      return;
+  }
+
+  event.preventDefault();
+  camera.position
+    .copy(controls.target)
+    .add(new THREE.Vector3().setFromSpherical(spherical));
+  controls.update();
+});
+
 renderer.setAnimationLoop((time) => {
   companion.update(time / 1000, machine.get(), reducedMotion);
   controls.update();
